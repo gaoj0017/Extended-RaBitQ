@@ -1,12 +1,14 @@
 # Extended RaBitQ
-Using Extended RaBitQ for approximate nearest neighbor search without storing raw data vectors in main memory.
 
-The project provides more trade-offs between space consumptions and the accuracy of distance estimation. Please refer to our paper for detailed information https://arxiv.org/pdf/2409.09913. Based on our experiments, this algorithm brings especially significant improvement in the setting from 2-bit to 6-bit, which helps an algorithm to achieve high recall without reranking. 
+> Replace your scalar and binary quantization with RaBitQ seamlessly. Enjoy blazingly fast distance computation with dominant accuracy. 
 
-*   Intuitively, the algorithm achieves the promising performance because it "constructs" the codebook for every vector individually. Specifically, our method first considers a codebook formed by $B$-bit uint vectors; and then transform the codebook, i.e., translating and rescaling, on a per-vector basis. By trying different parameters of transforming, the algorithm can find a vector in the transformed codebook, that best approximate a data vector.
+The project proposes a novel quantization algorithm developped from RaBitQ. The algorithm supports to compress high-dimensional vectors with arbitrary compression rates. Its computation is exactly the same as the classical scalar quantization and has dominant accuracy under same compression rates. It brings especially significant improvement in the setting from 2-bit to 6-bit, which helps an algorithm to achieve high recall without reranking.
+We summarize the key intuitions and results as follows. For more details, please refer to our paper https://arxiv.org/pdf/2409.09913.
+
+*   Intuitively, the algorithm achieves promising performance because it "constructs" the codebook for every vector individually. Specifically, our method first considers a codebook formed by $B$-bit uint vectors; and then transform the codebook, i.e., translating and rescaling, on a per-vector basis. By trying different parameters of transforming, the algorithm can find a vector in the transformed codebook, that best approximate a data vector.
 *   Geometrically, the operation is equivalent to (1) normalizing both data vectors and the vectors in codebooks onto high-dim unit spheres and; (2)find every data vector's best match in the codebook after the normalization operation.
 *   Theoretically, we prove that based on the technology above, our algorithm provides an asymptotically optimal error bound regarding the trade-off between the error and the space consumption. To our knowledge, our algorithm is also the first practical algorithm that achieves the optimality. 
-
+*   The computation of distances and inner product can be fully supported by the arithmetic operations of unsigned integers, i.e., the computation is exactly the same as the classical scalar quantization. Thus, it can be seen as a better scalar quantization and replace the classical ones seamlessly.
 
 ### Prepapring 
 
